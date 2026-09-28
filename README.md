@@ -43,3 +43,7 @@ placed them and in the Discord channel — the Discord message is the durable co
 ```bash
 python3 -m http.server 8130    # then open http://localhost:8130
 ```
+
+## Live
+
+https://azan-clock-store.vercel.app
