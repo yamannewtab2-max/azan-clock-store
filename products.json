@@ -1,0 +1,47 @@
+[
+  {
+    "id": "az-clsc",
+    "name": "Azan Clock Classic — Wood",
+    "tagline": "Full azan + Hijri date, wooden case",
+    "price": 189000,
+    "photo": "",
+    "badge": "",
+    "stock": 12
+  },
+  {
+    "id": "az-led",
+    "name": "Azan Clock LED Digital — Black",
+    "tagline": "Big 3-inch LED digits, 5 daily azan",
+    "price": 249000,
+    "photo": "",
+    "badge": "Popular",
+    "stock": 20
+  },
+  {
+    "id": "az-hijri",
+    "name": "Azan Clock Hijri Premium",
+    "tagline": "Hijri + Gregorian, 8 city presets",
+    "price": 329000,
+    "photo": "",
+    "badge": "",
+    "stock": 8
+  },
+  {
+    "id": "az-square",
+    "name": "Azan Clock Square — Masjid",
+    "tagline": "Wall mount for masjid & musalla",
+    "price": 215000,
+    "photo": "",
+    "badge": "",
+    "stock": 15
+  },
+  {
+    "id": "az-grand",
+    "name": "Azan Clock Grand Mosque Edition",
+    "tagline": "Remote, temperature, 8-month memory",
+    "price": 449000,
+    "photo": "",
+    "badge": "Best",
+    "stock": 5
+  }
+]
