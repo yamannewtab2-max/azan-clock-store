@@ -12,6 +12,19 @@ channel the moment a customer places one.
 - `assets/icon.svg` — app icon / Add-to-Home-Screen.
 - `products.json` `photo` empty → a generated clock illustration is drawn instead.
 
+## Pages
+
+- `/` — the shop: 12 models, family filter (wristwatch / wall clock / table watch), cart, checkout.
+- `/p/<id>` — one page per model (`/p/w-01`, `/p/c-04`, `/p/t-03`), served by `p.html`
+  through the rewrite in `vercel.json`. Each page carries: gallery (photos when supplied,
+  otherwise a drawn preview), description, specification list, quantity, add-to-cart,
+  related models from the same family, and Product JSON-LD for Google.
+- `/product/<id>` — the same page, if you prefer the longer URL.
+
+Adding a photo: drop the file in `assets/p/` and list it in that product's `photos`
+array in `products.json` — the drawn preview is replaced automatically, and extra
+photos become a thumbnail strip.
+
 ## Owner panel
 
 Open the store and tap **Orders** (or go to `/#orders`).

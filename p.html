@@ -150,6 +150,11 @@
   .errbox h1{font-size:30px;letter-spacing:-.02em}
   .errbox p{color:var(--muted);margin-top:12px}
 
+  @media (max-width:560px){
+    .brand small{display:none}          /* the tagline wraps the bar on a phone */
+    .top-in{gap:10px}
+    .ghost,.cartbtn{padding:0 12px}
+  }
   @media (max-width:920px){
     .pdp{grid-template-columns:1fr;gap:26px;padding-top:18px}
     .gallery{position:relative;top:0}
