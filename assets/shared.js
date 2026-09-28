@@ -81,7 +81,8 @@
     { key: 'table', label: 'Table watch' },
   ];
   const familyLabel = (k) => ((FAMILIES.find((f) => f.key === k) || {}).label || '');
-  const productUrl = (id) => './p/' + encodeURIComponent(id);
+  // root-absolute: p.html is served under /p/<id>, so relative paths would resolve there
+  const productUrl = (id) => '/p/' + encodeURIComponent(id);
 
   /* ---------- cart, shared with the shop ---------- */
   function read() {

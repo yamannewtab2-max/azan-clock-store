@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0B0E0C">
 <title>Product — Azan Clock Store</title>
-<link rel="icon" href="assets/icon.svg">
-<link rel="apple-touch-icon" href="assets/icon.svg">
+<link rel="icon" href="/assets/icon.svg">
+<link rel="apple-touch-icon" href="/assets/icon.svg">
 <meta name="description" content="Azan wall clocks, wristwatches and table watches — full azan, Hijri date, delivered by our courier.">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -164,12 +164,12 @@
 
 <header class="top">
   <div class="top-in">
-    <a class="brand" href="./">
+    <a class="brand" href="/">
       <span class="dotmark"></span>
       <span>Azan Clock<small>Islamic wall clocks</small></span>
     </a>
     <div class="top-actions">
-      <a class="ghost" href="./#orders">Orders</a>
+      <a class="ghost" href="/#orders">Orders</a>
       <button class="cartbtn" id="cartBtn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3 4h2l2.4 11.2A2 2 0 0 0 9.4 17h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg>
         Cart <span class="n" id="cartN">0</span>
@@ -179,7 +179,7 @@
 </header>
 
 <main class="wrap" id="main">
-  <nav class="crumbs"><a href="./">Shop</a> <span>/</span> <span id="crumbFam">…</span> <span>/</span> <span id="crumbName">…</span></nav>
+  <nav class="crumbs"><a href="/">Shop</a> <span>/</span> <span id="crumbFam">…</span> <span>/</span> <span id="crumbName">…</span></nav>
   <article class="pdp" id="pdp"></article>
   <section class="related"><h2>More in this family</h2><div class="relgrid" id="rel"></div></section>
   <footer class="site">Azan Clock Store · delivery 1–3 days · QRIS, transfer or cash to the courier</footer>
@@ -197,7 +197,7 @@
 
 <div class="mobilebuy" id="mobilebuy"></div>
 
-<script src="assets/shared.js"></script>
+<script src="/assets/shared.js"></script>
 <script>
 /* ---------------- one product page, driven by products.json ----------------
    The id comes from /p/<id> (a Vercel rewrite serves this file) or from
@@ -237,14 +237,14 @@ function render() {
   if (!p) {
     $('.pdp').outerHTML = `<div class="errbox"><h1>Model not found</h1>
       <p>That link does not match a model in the catalogue.</p>
-      <div class="buyrow" style="justify-content:center"><a class="btn primary" href="./">Back to the shop</a></div></div>`;
+      <div class="buyrow" style="justify-content:center"><a class="btn primary" href="/">Back to the shop</a></div></div>`;
     $('#rel').innerHTML = ALL.map(relCard).join('');
     return;
   }
   document.title = `${p.name} — ${idr(p.price)} · Azan Clock Store`;
   const md = document.querySelector('meta[name="description"]');
   if (md) md.setAttribute('content', `${p.tagline} ${(p.desc || [])[0] || ''}`.slice(0, 180));
-  $('#crumbFam').innerHTML = `<a href="./#clocks">${esc(familyLabel(p.cat))}</a>`;
+  $('#crumbFam').innerHTML = `<a href="/#clocks">${esc(familyLabel(p.cat))}</a>`;
   $('#crumbName').textContent = p.name;
 
   $('.pdp').innerHTML = `
@@ -265,7 +265,7 @@ function render() {
           Add to cart
           <svg class="tick" viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
         </button>
-        <a class="btn line" href="./#cart">View cart</a>
+        <a class="btn line" href="/#cart">View cart</a>
       </div>
 
       <div class="buy-notes">
@@ -367,7 +367,7 @@ function openCart(on) {
 $('#cartBtn').onclick = () => { renderCart(); openCart(true); };
 $('#closeCart').onclick = () => openCart(false);
 $('#scrim').onclick = () => openCart(false);
-$('#toCheckout').onclick = () => { location.href = './#cart'; };
+$('#toCheckout').onclick = () => { location.href = '/#cart'; };
 addEventListener('keydown', (e) => { if (e.key === 'Escape') openCart(false); });
 
 document.addEventListener('click', (e) => {
@@ -387,7 +387,7 @@ document.addEventListener('click', (e) => {
 /* ---------------- boot ---------------- */
 (async () => {
   try {
-    const r = await fetch('products.json', { cache: 'no-cache' });
+    const r = await fetch('/products.json', { cache: 'no-cache' });
     ALL = await r.json();
   } catch (e) { ALL = []; }
   const id = idFromUrl();
