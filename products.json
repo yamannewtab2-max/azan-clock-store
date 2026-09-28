@@ -1,47 +1,16 @@
 [
-  {
-    "id": "az-clsc",
-    "name": "Azan Clock Classic — Wood",
-    "tagline": "Full azan + Hijri date, wooden case",
-    "price": 189000,
-    "photo": "",
-    "badge": "",
-    "stock": 12
-  },
-  {
-    "id": "az-led",
-    "name": "Azan Clock LED Digital — Black",
-    "tagline": "Big 3-inch LED digits, 5 daily azan",
-    "price": 249000,
-    "photo": "",
-    "badge": "Popular",
-    "stock": 20
-  },
-  {
-    "id": "az-hijri",
-    "name": "Azan Clock Hijri Premium",
-    "tagline": "Hijri + Gregorian, 8 city presets",
-    "price": 329000,
-    "photo": "",
-    "badge": "",
-    "stock": 8
-  },
-  {
-    "id": "az-square",
-    "name": "Azan Clock Square — Masjid",
-    "tagline": "Wall mount for masjid & musalla",
-    "price": 215000,
-    "photo": "",
-    "badge": "",
-    "stock": 15
-  },
-  {
-    "id": "az-grand",
-    "name": "Azan Clock Grand Mosque Edition",
-    "tagline": "Remote, temperature, 8-month memory",
-    "price": 449000,
-    "photo": "",
-    "badge": "Best",
-    "stock": 5
-  }
+  { "id":"w-01", "cat":"wrist", "name":"Wrist Classic — Leather", "tagline":"Azan on the wrist, five times a day.", "price":289000, "specs":["36 mm","Leather","5 azan"], "flag":"New", "badge":"New", "stock":14, "photo":"" },
+  { "id":"w-02", "cat":"wrist", "name":"Wrist Steel — Bracelet", "tagline":"Brushed steel, silent vibration azan.", "price":349000, "specs":["40 mm","Steel","Vibrate"], "stock":9, "photo":"" },
+  { "id":"w-03", "cat":"wrist", "name":"Wrist Sport — Silicone", "tagline":"For kerja, jalan and the gym.", "price":259000, "specs":["42 mm","Silicone","WR50"], "stock":17, "photo":"" },
+  { "id":"w-04", "cat":"wrist", "name":"Wrist Slim — Dress", "tagline":"Six millimetres thick under a cuff.", "price":319000, "specs":["38 mm","6 mm","Hijri"], "flag":"Best", "badge":"Best", "stock":7, "photo":"" },
+
+  { "id":"c-01", "cat":"wall", "name":"Wall Classic — Rattan", "tagline":"Rattan case, brass hands, 12 inch.", "price":189000, "specs":["12 in","Rattan","72 dB"], "stock":12, "photo":"" },
+  { "id":"c-02", "cat":"wall", "name":"Wall LED — Digital", "tagline":"Three-inch digits you read across the room.", "price":249000, "specs":["3″ LED","8 cities","Remote"], "flag":"Most taken", "badge":"Popular", "stock":20, "photo":"" },
+  { "id":"c-03", "cat":"wall", "name":"Wall Square — Masjid", "tagline":"Built for a musalla wall, loud and simple.", "price":215000, "specs":["15 in","Masjid","Remote"], "stock":8, "photo":"" },
+  { "id":"c-04", "cat":"wall", "name":"Wall Grand — Mosque", "tagline":"Remote, temperature, eight-month memory.", "price":449000, "specs":["16 in","Remote","8 mo"], "stock":5, "photo":"" },
+
+  { "id":"t-01", "cat":"table", "name":"Table Wood — Desk", "tagline":"Stands on a desk, tilts to any angle.", "price":199000, "specs":["Wood","Tilt","5 azan"], "stock":11, "photo":"" },
+  { "id":"t-02", "cat":"table", "name":"Table LED — Bedside", "tagline":"Dims itself at night, lights up at Fajr.", "price":229000, "specs":["LED","Dim","Alarm"], "stock":13, "photo":"" },
+  { "id":"t-03", "cat":"table", "name":"Table Mini — Travel", "tagline":"Folds flat, fits a bag, keeps the times.", "price":179000, "specs":["Fold","USB","8 cities"], "stock":22, "photo":"" },
+  { "id":"t-04", "cat":"table", "name":"Table Grand — Brass", "tagline":"Brass base, the one you keep for years.", "price":399000, "specs":["Brass","Weight","Hijri"], "flag":"Best", "badge":"Best", "stock":6, "photo":"" }
 ]

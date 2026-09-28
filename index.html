@@ -103,7 +103,7 @@
   .clock .tick{stroke:var(--brass);stroke-width:2;stroke-linecap:round;opacity:.75}
   .clock .tick.big{stroke-width:3.4;opacity:1}
   .clock .brandmark{fill:var(--brass);opacity:.9;font-family:var(--mono);font-size:11px;letter-spacing:.28em}
-  .clock .hand{stroke:var(--ink);stroke-linecap:round;transform-origin:150px 150px}
+  .clock .hand{stroke:var(--ink);stroke-linecap:round}
   .clock .hand.h{stroke-width:7}
   .clock .hand.m{stroke-width:4.6}
   .clock .hand.s{stroke:var(--brass-2);stroke-width:1.6}
@@ -123,6 +123,14 @@
   .block-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px}
   .block-head h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.03em;font-weight:800}
   .block-head p{color:var(--muted);font-size:13.5px;margin-top:8px}
+  .famfilter{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
+  .famfilter button{height:34px;padding:0 14px;border-radius:99px;border:1px solid var(--line-2);background:none;
+    font-size:12px;font-weight:600;color:var(--ink-2);cursor:pointer;transition:.22s var(--ease);display:flex;align-items:center;gap:8px}
+  .famfilter button:hover{border-color:var(--brass);color:var(--brass-2)}
+  .famfilter button.on{background:var(--brass);border-color:var(--brass);color:#15130A}
+  .famfilter button i{font-style:normal;font-family:var(--mono);font-size:10.5px;opacity:.7}
+  .shot .fam{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint)}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:18px}
   .card{background:linear-gradient(180deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--r-lg);
     padding:16px;opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease),
@@ -363,6 +371,7 @@
           <p>Prices are editable in the Orders panel — tap any order to see the flow.</p>
         </div>
       </div>
+      <div class="famfilter" id="cats"></div>
       <div class="grid" id="grid"></div>
     </section>
     <footer class="site">
@@ -450,25 +459,65 @@ function load() {
 }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
 
-/* ---------- clock art (used when a product has no photo) ---------- */
-function clockArt(seed, size) {
-  seed = seed || '';
-  let h = 0; for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) % 360;
-  const hues = ['#C9A227', '#D9B24C', '#B98F1F', '#E0C070'];
-  const accent = hues[Math.abs(h) % hues.length];
-  const style = Math.abs(h) % 3;
+/* ---------- product art: one silhouette per family ----------
+   The clock face IS the product, so a clean dial in the right case reads honestly
+   until real photos arrive (add "photo" to products.json and it is used instead). */
+const BRASS = ['#C9A227', '#D9B44A', '#B98F1F', '#E0C070'];
+function dial(accent, r, small) {
   const ticks = Array.from({ length: 12 }, (_, i) =>
-    `<line x1="150" y1="34" x2="150" y2="${i % 3 === 0 ? 48 : 42}" stroke="${accent}" stroke-width="${i % 3 === 0 ? 3 : 1.6}"
-      transform="rotate(${i * 30} 150 150)" opacity="${i % 3 === 0 ? 1 : .55}" stroke-linecap="round"/>`).join('');
-  return `<svg viewBox="0 0 300 300">
-    <circle cx="150" cy="150" r="${style === 1 ? 118 : 126}" fill="#0E120F" stroke="#332C15" stroke-width="1.5"/>
-    <circle cx="150" cy="150" r="134" fill="none" stroke="${accent}" stroke-width="2" opacity=".55"/>
-    ${ticks}
-    <text x="150" y="104" text-anchor="middle" fill="${accent}" font-family="monospace" font-size="11" letter-spacing="3" opacity=".9">AZAN</text>
-    <line x1="150" y1="150" x2="150" y2="${style === 2 ? 96 : 86}" stroke="#F2F0E8" stroke-width="7" stroke-linecap="round"/>
-    <line x1="150" y1="150" x2="196" y2="112" stroke="#F2F0E8" stroke-width="4.6" stroke-linecap="round"/>
-    <line x1="150" y1="150" x2="150" y2="52" stroke="${accent}" stroke-width="1.6" stroke-linecap="round" class="${reduce ? '' : 'spin'}"/>
-    <circle cx="150" cy="150" r="5" fill="${accent}"/>
+    `<line x1="150" y1="${150 - r + 5}" x2="150" y2="${150 - r + (i % 3 === 0 ? 19 : 13)}" stroke="${accent}"
+      stroke-width="${i % 3 === 0 ? 2.6 : 1.2}" opacity="${i % 3 === 0 ? 1 : .55}" stroke-linecap="round"
+      transform="rotate(${i * 30} 150 150)"/>`).join('');
+  return `${ticks}
+    <text x="150" y="${150 - r + 33}" text-anchor="middle" fill="${accent}" font-family="monospace"
+      font-size="${small ? 8 : 11}" letter-spacing="3.5" opacity=".9">AZAN</text>
+    <line x1="150" y1="150" x2="150" y2="${150 - r * .56}" stroke="#F2F0E8" stroke-width="${small ? 6 : 7}" stroke-linecap="round"/>
+    <line x1="150" y1="150" x2="${150 + r * .38}" y2="${150 - r * .3}" stroke="#F2F0E8" stroke-width="${small ? 4 : 4.6}" stroke-linecap="round"/>
+    <line x1="150" y1="150" x2="150" y2="${150 - r * .84}" stroke="${accent}" stroke-width="1.5" stroke-linecap="round" class="${reduce ? '' : 'spin'}"/>
+    <circle cx="150" cy="150" r="4.6" fill="${accent}"/>`;
+}
+function productArt(p) {
+  const seed = p && p.id || '';
+  let h = 0; for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) % 360;
+  const accent = BRASS[Math.abs(h) % BRASS.length];
+  const cat = (p && p.cat) || 'wall';
+
+  if (cat === 'wrist') {
+    return `<svg viewBox="0 0 300 300" aria-hidden="true">
+      <rect x="113" y="10" width="74" height="80" rx="16" fill="#232A23" stroke="#39443A" stroke-width="1"/>
+      <rect x="113" y="210" width="74" height="80" rx="16" fill="#232A23" stroke="#39443A" stroke-width="1"/>
+      <circle cx="150" cy="150" r="76" fill="#0E120F" stroke="${accent}" stroke-width="2"/>
+      <circle cx="150" cy="150" r="66" fill="none" stroke="${accent}" stroke-width=".6" opacity=".45"/>
+      ${dial(accent, 66, true)}
+      <rect x="227" y="142" width="7" height="16" rx="3" fill="${accent}"/>
+    </svg>`;
+  }
+  if (cat === 'table') {
+    return `<svg viewBox="0 0 300 300" aria-hidden="true">
+      <path d="M118 194 L150 230 L182 194 Z" fill="#232A23" stroke="#39443A" stroke-width="1"/>
+      <rect x="96" y="226" width="108" height="9" rx="4" fill="${accent}" opacity=".9"/>
+      <rect x="104" y="235" width="92" height="6" rx="3" fill="#2A2D24"/>
+      <circle cx="150" cy="118" r="82" fill="#0E120F" stroke="${accent}" stroke-width="2"/>
+      <circle cx="150" cy="118" r="72" fill="none" stroke="${accent}" stroke-width=".6" opacity=".45"/>
+      <g transform="translate(0,-32)">${dial(accent, 72, true)}</g>
+    </svg>`;
+  }
+  if (p && p.id === 'c-02') {
+    return `<svg viewBox="0 0 300 300" aria-hidden="true">
+      <rect x="20" y="72" width="260" height="152" rx="12" fill="#0E120F" stroke="${accent}" stroke-width="1.6"/>
+      <text x="150" y="82" text-anchor="middle" fill="#8C8877" font-family="monospace" font-size="9" letter-spacing="5">28 SAFAR 1448</text>
+      <text x="150" y="164" text-anchor="middle" fill="${accent}" font-family="monospace" font-size="54" letter-spacing="2">4:38</text>
+      <text x="150" y="192" text-anchor="middle" fill="#8C8877" font-family="monospace" font-size="12" letter-spacing="6">FAJR</text>
+      <rect x="20" y="224" width="260" height="9" rx="4" fill="${accent}" opacity=".35"/>
+      <path d="M150 40 l5 10 -5 10 -5 -10 z" fill="${accent}"/>
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 300 300" aria-hidden="true">
+    <path d="M150 22 l4 8 -4 8 -4 -8 z" fill="none" stroke="${accent}" stroke-width="1.2"/>
+    <circle cx="150" cy="166" r="98" fill="${accent}" opacity=".92"/>
+    <circle cx="150" cy="166" r="90" fill="#0E120F"/>
+    <circle cx="150" cy="166" r="82" fill="none" stroke="${accent}" stroke-width=".8" opacity=".55"/>
+    <g transform="translate(0,16)">${dial(accent, 82, true)}</g>
   </svg>`;
 }
 
@@ -502,14 +551,31 @@ async function loadProducts() {
   $('#statProducts').textContent = PRODUCTS.length;
   renderGrid();
 }
+const FAMILIES = [
+  { key: 'wrist', label: 'Wristwatch' },
+  { key: 'wall', label: 'Wall clock' },
+  { key: 'table', label: 'Table watch' },
+];
+let activeCat = 'all';
+function renderChips() {
+  const box = $('#cats'); if (!box) return;
+  const n = (k) => k === 'all' ? PRODUCTS.length : PRODUCTS.filter((p) => p.cat === k).length;
+  box.innerHTML = [{ key: 'all', label: 'All' }].concat(FAMILIES).map((f) =>
+    `<button data-cat="${f.key}" class="${activeCat === f.key ? 'on' : ''}">${esc(f.label)} <i>${n(f.key)}</i></button>`).join('');
+  $$('#cats button').forEach((b) => b.onclick = () => { activeCat = b.dataset.cat; renderGrid(); });
+}
 function renderGrid() {
   const grid = $('#grid');
   if (!PRODUCTS.length) { grid.innerHTML = '<div class="empty">products.json could not be loaded.</div>'; return; }
-  grid.innerHTML = PRODUCTS.map((p, i) => `
+  const list = activeCat === 'all' ? PRODUCTS : PRODUCTS.filter((p) => p.cat === activeCat);
+  renderChips();
+  const fam = (k) => ((FAMILIES.find((f) => f.key === k) || {}).label || '');
+  grid.innerHTML = list.map((p, i) => `
     <article class="card" data-id="${esc(p.id)}" style="transition-delay:${Math.min(i * 70, 420)}ms">
       <div class="shot">
         ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
-        ${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">` : clockArt(p.id)}
+        <span class="fam">${esc(fam(p.cat))}</span>
+        ${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">` : productArt(p)}
       </div>
       <h3>${esc(p.name)}</h3>
       <div class="tag">${esc(p.tagline || '')}</div>
@@ -520,7 +586,7 @@ function renderGrid() {
           <svg class="tick" viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
         </button>
       </div>
-      <div class="shot-strip">${p.stock ? `${p.stock} in stock` : 'made to order'}</div>
+      <div class="shot-strip">${(p.specs || []).map((s) => esc(s)).join(' · ') || (p.stock ? p.stock + ' in stock' : 'made to order')}</div>
     </article>`).join('');
   observeCards();
 }
