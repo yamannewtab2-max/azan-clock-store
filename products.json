@@ -1,16 +1,136 @@
 [
-  { "id":"w-01", "cat":"wrist", "name":"Wrist Classic — Leather", "tagline":"Azan on the wrist, five times a day.", "price":289000, "specs":["36 mm","Leather","5 azan"], "flag":"New", "badge":"New", "stock":14, "photo":"" },
-  { "id":"w-02", "cat":"wrist", "name":"Wrist Steel — Bracelet", "tagline":"Brushed steel, silent vibration azan.", "price":349000, "specs":["40 mm","Steel","Vibrate"], "stock":9, "photo":"" },
-  { "id":"w-03", "cat":"wrist", "name":"Wrist Sport — Silicone", "tagline":"For kerja, jalan and the gym.", "price":259000, "specs":["42 mm","Silicone","WR50"], "stock":17, "photo":"" },
-  { "id":"w-04", "cat":"wrist", "name":"Wrist Slim — Dress", "tagline":"Six millimetres thick under a cuff.", "price":319000, "specs":["38 mm","6 mm","Hijri"], "flag":"Best", "badge":"Best", "stock":7, "photo":"" },
+  {
+    "id": "w-01", "cat": "wrist", "name": "Wrist Classic — Leather",
+    "tagline": "Azan on the wrist, five times a day.",
+    "price": 289000, "stock": 14, "flag": "New", "badge": "New",
+    "specs": ["36 mm case", "Leather strap", "5 azan", "7-day battery"],
+    "photos": [],
+    "desc": [
+      "An azan watch sized for a santri's wrist: a 36 mm case that fits under a sleeve and a soft leather strap that disappears on the arm after a day.",
+      "It vibrates quietly for each of the five prayers and sounds the azan when you hold the lower button, so it stays silent through a lesson and still calls when it matters. Set the city once and it keeps Fajr through Isha on its own, seven days on a charge."
+    ]
+  },
+  {
+    "id": "w-02", "cat": "wrist", "name": "Wrist Steel — Bracelet",
+    "tagline": "Brushed steel, silent vibration azan.",
+    "price": 349000, "stock": 9,
+    "specs": ["40 mm case", "Steel bracelet", "Vibration only", "8 cities"],
+    "photos": [],
+    "desc": [
+      "Brushed stainless steel with a folded clasp, for the teacher who is in front of a class all day and cannot keep looking at a phone.",
+      "Vibration is the default, so the azan arrives without a sound. The dial carries the Hijri date under the hands, and the bracelet adjusts without tools."
+    ]
+  },
+  {
+    "id": "w-03", "cat": "wrist", "name": "Wrist Sport — Silicone",
+    "tagline": "For kerja, jalan and the gym.",
+    "price": 259000, "stock": 17,
+    "specs": ["42 mm case", "Silicone strap", "WR50", "Stopwatch"],
+    "photos": [],
+    "desc": [
+      "A 42 mm silicone-strap watch built for heat and water: rain, wudu and washing up are all fine down to 50 metres.",
+      "The dial is readable at arm's length, which is the point when your hands are full or you are counting laps."
+    ]
+  },
+  {
+    "id": "w-04", "cat": "wrist", "name": "Wrist Slim — Dress",
+    "tagline": "Six millimetres thick under a cuff.",
+    "price": 319000, "stock": 7, "flag": "Best", "badge": "Best",
+    "specs": ["38 mm case", "6 mm thin", "Hijri date", "5 azan"],
+    "photos": [],
+    "desc": [
+      "Six millimetres thin, so it slides under a shirt cuff instead of catching on it — the watch for a wedding, a hafalan ceremony, or a day of meetings.",
+      "Under the quiet face it carries the same azan engine as the rest of the range: five calls a day, silent or audible, plus the Hijri date."
+    ]
+  },
 
-  { "id":"c-01", "cat":"wall", "name":"Wall Classic — Rattan", "tagline":"Rattan case, brass hands, 12 inch.", "price":189000, "specs":["12 in","Rattan","72 dB"], "stock":12, "photo":"" },
-  { "id":"c-02", "cat":"wall", "name":"Wall LED — Digital", "tagline":"Three-inch digits you read across the room.", "price":249000, "specs":["3″ LED","8 cities","Remote"], "flag":"Most taken", "badge":"Popular", "stock":20, "photo":"" },
-  { "id":"c-03", "cat":"wall", "name":"Wall Square — Masjid", "tagline":"Built for a musalla wall, loud and simple.", "price":215000, "specs":["15 in","Masjid","Remote"], "stock":8, "photo":"" },
-  { "id":"c-04", "cat":"wall", "name":"Wall Grand — Mosque", "tagline":"Remote, temperature, eight-month memory.", "price":449000, "specs":["16 in","Remote","8 mo"], "stock":5, "photo":"" },
+  {
+    "id": "c-01", "cat": "wall", "name": "Wall Classic — Rattan",
+    "tagline": "Rattan case, brass hands, 12 inch.",
+    "price": 189000, "stock": 12,
+    "specs": ["12 inch", "Rattan case", "72 dB", "2× AA"],
+    "photos": [],
+    "desc": [
+      "The clock most people picture when they hear azan clock: a 12-inch rattan case, brass hands and a face you can read from the other side of the room.",
+      "Full azan for all five prayers at masjid volume, or a light chime for a bedroom. Two AA batteries last about eight months and keep the time through a power cut."
+    ]
+  },
+  {
+    "id": "c-02", "cat": "wall", "name": "Wall LED — Digital",
+    "tagline": "Three-inch digits you read across the room.",
+    "price": 249000, "stock": 20, "flag": "Most taken", "badge": "Popular",
+    "specs": ["3″ LED", "8 cities", "Remote", "Prayer name on screen"],
+    "photos": [],
+    "desc": [
+      "Three-inch LED digits with the prayer name and the Hijri date on the same screen, so you read the next prayer without walking closer.",
+      "It comes with a remote, so volume and city are set from the sofa. Eight city presets cover Jakarta, Bandung, Surabaya and Makkah among others."
+    ]
+  },
+  {
+    "id": "c-03", "cat": "wall", "name": "Wall Square — Masjid",
+    "tagline": "Built for a musalla wall, loud and simple.",
+    "price": 215000, "stock": 8,
+    "specs": ["15 inch", "Masjid volume", "Remote", "Iqamah timer"],
+    "photos": [],
+    "desc": [
+      "A square 15-inch face made for a musalla wall, with volume high enough to fill a room of forty people.",
+      "The iqamah timer counts the minutes between the call and the standing prayer, so the jamaah knows when to line up without anyone watching a phone."
+    ]
+  },
+  {
+    "id": "c-04", "cat": "wall", "name": "Wall Grand — Mosque",
+    "tagline": "Remote, temperature, eight-month memory.",
+    "price": 449000, "stock": 5,
+    "specs": ["16 inch", "Remote", "8-month memory", "Temperature"],
+    "photos": [],
+    "desc": [
+      "The largest face in the range at 16 inches, with a remote and a memory that keeps every setting for eight months without a battery.",
+      "It shows the temperature beside the time, which the caretaker uses to decide whether the fans go on before the jamaah arrives."
+    ]
+  },
 
-  { "id":"t-01", "cat":"table", "name":"Table Wood — Desk", "tagline":"Stands on a desk, tilts to any angle.", "price":199000, "specs":["Wood","Tilt","5 azan"], "stock":11, "photo":"" },
-  { "id":"t-02", "cat":"table", "name":"Table LED — Bedside", "tagline":"Dims itself at night, lights up at Fajr.", "price":229000, "specs":["LED","Dim","Alarm"], "stock":13, "photo":"" },
-  { "id":"t-03", "cat":"table", "name":"Table Mini — Travel", "tagline":"Folds flat, fits a bag, keeps the times.", "price":179000, "specs":["Fold","USB","8 cities"], "stock":22, "photo":"" },
-  { "id":"t-04", "cat":"table", "name":"Table Grand — Brass", "tagline":"Brass base, the one you keep for years.", "price":399000, "specs":["Brass","Weight","Hijri"], "flag":"Best", "badge":"Best", "stock":6, "photo":"" }
+  {
+    "id": "t-01", "cat": "table", "name": "Table Wood — Desk",
+    "tagline": "Stands on a desk, tilts to any angle.",
+    "price": 199000, "stock": 11,
+    "specs": ["Wood base", "Tilts", "5 azan", "2× AA"],
+    "photos": [],
+    "desc": [
+      "A desk clock on a wooden base that tilts to whatever angle you are reading at — beside a laptop, on a shelf, or on the shelf in front of a class.",
+      "Same azan engine as the wall clocks: five calls a day, silent mode for study hours, and a face that stays readable in a lit room."
+    ]
+  },
+  {
+    "id": "t-02", "cat": "table", "name": "Table LED — Bedside",
+    "tagline": "Dims itself at night, lights up at Fajr.",
+    "price": 229000, "stock": 13,
+    "specs": ["LED", "Auto dim", "Fajr light", "Alarm"],
+    "photos": [],
+    "desc": [
+      "A bedside clock that dims itself after lights out and brightens at Fajr, so you wake to a lit face instead of a dark room and a sound.",
+      "The alarm asks you to sit up before it goes quiet — the difference between waking for Fajr and switching it off half asleep."
+    ]
+  },
+  {
+    "id": "t-03", "cat": "table", "name": "Table Mini — Travel",
+    "tagline": "Folds flat, fits a bag, keeps the times.",
+    "price": 179000, "stock": 22,
+    "specs": ["Folds flat", "USB-C", "8 cities", "84 g"],
+    "photos": [],
+    "desc": [
+      "Eighty-four grams that fold flat into a bag: for mudik, for a trip to another city, for the room you are staying in and do not want to be late in.",
+      "It charges over USB-C, remembers eight cities, and holds its settings while it sits switched off in a pocket."
+    ]
+  },
+  {
+    "id": "t-04", "cat": "table", "name": "Table Grand — Brass",
+    "tagline": "Brass base, the one you keep for years.",
+    "price": 399000, "stock": 6, "flag": "Best", "badge": "Best",
+    "specs": ["Brass base", "Weighted", "Hijri date", "5 azan"],
+    "photos": [],
+    "desc": [
+      "A weighted brass base that stays where it is put, with a rounded face everyone in the room can see from a chair.",
+      "It is the one on the shelf that outlives the rest: brass that ages instead of wearing out, and the full azan engine with the Hijri date."
+    ]
+  }
 ]

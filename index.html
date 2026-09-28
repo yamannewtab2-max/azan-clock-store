@@ -151,6 +151,9 @@
   .card .tag{color:var(--muted);font-size:12.5px;margin-top:5px;min-height:34px}
   .card .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
   .price{font-family:var(--mono);font-size:17px;font-weight:600;letter-spacing:-.02em}
+  .mini{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 13px;border-radius:11px;
+    border:1px solid var(--line);color:var(--ink-2);font-size:12.5px;font-weight:600;transition:.2s var(--ease)}
+  .mini:hover{border-color:var(--brass);color:var(--brass-2)}
   .add{height:40px;padding:0 15px;border-radius:11px;border:1px solid var(--line-2);font-size:13px;font-weight:700;
     display:inline-flex;align-items:center;gap:8px;transition:.22s var(--ease);position:relative;overflow:hidden}
   .add:hover{border-color:var(--brass);color:var(--brass-2)}
@@ -428,6 +431,7 @@
   <span id="toastText">New order</span>
 </div>
 
+<script src="assets/shared.js"></script>
 <script>
 /* =========================================================
    Azan Clock Store — one file, no dependencies.
@@ -459,67 +463,7 @@ function load() {
 }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
 
-/* ---------- product art: one silhouette per family ----------
-   The clock face IS the product, so a clean dial in the right case reads honestly
-   until real photos arrive (add "photo" to products.json and it is used instead). */
-const BRASS = ['#C9A227', '#D9B44A', '#B98F1F', '#E0C070'];
-function dial(accent, r, small) {
-  const ticks = Array.from({ length: 12 }, (_, i) =>
-    `<line x1="150" y1="${150 - r + 5}" x2="150" y2="${150 - r + (i % 3 === 0 ? 19 : 13)}" stroke="${accent}"
-      stroke-width="${i % 3 === 0 ? 2.6 : 1.2}" opacity="${i % 3 === 0 ? 1 : .55}" stroke-linecap="round"
-      transform="rotate(${i * 30} 150 150)"/>`).join('');
-  return `${ticks}
-    <text x="150" y="${150 - r + 33}" text-anchor="middle" fill="${accent}" font-family="monospace"
-      font-size="${small ? 8 : 11}" letter-spacing="3.5" opacity=".9">AZAN</text>
-    <line x1="150" y1="150" x2="150" y2="${150 - r * .56}" stroke="#F2F0E8" stroke-width="${small ? 6 : 7}" stroke-linecap="round"/>
-    <line x1="150" y1="150" x2="${150 + r * .38}" y2="${150 - r * .3}" stroke="#F2F0E8" stroke-width="${small ? 4 : 4.6}" stroke-linecap="round"/>
-    <line x1="150" y1="150" x2="150" y2="${150 - r * .84}" stroke="${accent}" stroke-width="1.5" stroke-linecap="round" class="${reduce ? '' : 'spin'}"/>
-    <circle cx="150" cy="150" r="4.6" fill="${accent}"/>`;
-}
-function productArt(p) {
-  const seed = p && p.id || '';
-  let h = 0; for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) % 360;
-  const accent = BRASS[Math.abs(h) % BRASS.length];
-  const cat = (p && p.cat) || 'wall';
-
-  if (cat === 'wrist') {
-    return `<svg viewBox="0 0 300 300" aria-hidden="true">
-      <rect x="113" y="10" width="74" height="80" rx="16" fill="#232A23" stroke="#39443A" stroke-width="1"/>
-      <rect x="113" y="210" width="74" height="80" rx="16" fill="#232A23" stroke="#39443A" stroke-width="1"/>
-      <circle cx="150" cy="150" r="76" fill="#0E120F" stroke="${accent}" stroke-width="2"/>
-      <circle cx="150" cy="150" r="66" fill="none" stroke="${accent}" stroke-width=".6" opacity=".45"/>
-      ${dial(accent, 66, true)}
-      <rect x="227" y="142" width="7" height="16" rx="3" fill="${accent}"/>
-    </svg>`;
-  }
-  if (cat === 'table') {
-    return `<svg viewBox="0 0 300 300" aria-hidden="true">
-      <path d="M118 194 L150 230 L182 194 Z" fill="#232A23" stroke="#39443A" stroke-width="1"/>
-      <rect x="96" y="226" width="108" height="9" rx="4" fill="${accent}" opacity=".9"/>
-      <rect x="104" y="235" width="92" height="6" rx="3" fill="#2A2D24"/>
-      <circle cx="150" cy="118" r="82" fill="#0E120F" stroke="${accent}" stroke-width="2"/>
-      <circle cx="150" cy="118" r="72" fill="none" stroke="${accent}" stroke-width=".6" opacity=".45"/>
-      <g transform="translate(0,-32)">${dial(accent, 72, true)}</g>
-    </svg>`;
-  }
-  if (p && p.id === 'c-02') {
-    return `<svg viewBox="0 0 300 300" aria-hidden="true">
-      <rect x="20" y="72" width="260" height="152" rx="12" fill="#0E120F" stroke="${accent}" stroke-width="1.6"/>
-      <text x="150" y="82" text-anchor="middle" fill="#8C8877" font-family="monospace" font-size="9" letter-spacing="5">28 SAFAR 1448</text>
-      <text x="150" y="164" text-anchor="middle" fill="${accent}" font-family="monospace" font-size="54" letter-spacing="2">4:38</text>
-      <text x="150" y="192" text-anchor="middle" fill="#8C8877" font-family="monospace" font-size="12" letter-spacing="6">FAJR</text>
-      <rect x="20" y="224" width="260" height="9" rx="4" fill="${accent}" opacity=".35"/>
-      <path d="M150 40 l5 10 -5 10 -5 -10 z" fill="${accent}"/>
-    </svg>`;
-  }
-  return `<svg viewBox="0 0 300 300" aria-hidden="true">
-    <path d="M150 22 l4 8 -4 8 -4 -8 z" fill="none" stroke="${accent}" stroke-width="1.2"/>
-    <circle cx="150" cy="166" r="98" fill="${accent}" opacity=".92"/>
-    <circle cx="150" cy="166" r="90" fill="#0E120F"/>
-    <circle cx="150" cy="166" r="82" fill="none" stroke="${accent}" stroke-width=".8" opacity=".55"/>
-    <g transform="translate(0,16)">${dial(accent, 82, true)}</g>
-  </svg>`;
-}
+const productArt = AZ.productArt;   // shared with the product page (assets/shared.js)
 
 /* ---------- live hero clock ---------- */
 function buildTicks() {
@@ -571,16 +515,17 @@ function renderGrid() {
   renderChips();
   const fam = (k) => ((FAMILIES.find((f) => f.key === k) || {}).label || '');
   grid.innerHTML = list.map((p, i) => `
-    <article class="card" data-id="${esc(p.id)}" style="transition-delay:${Math.min(i * 70, 420)}ms">
+    <article class="card" data-id="${esc(p.id)}" data-pdp="${esc(p.id)}" style="transition-delay:${Math.min(i * 70, 420)}ms">
       <div class="shot">
         ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}
         <span class="fam">${esc(fam(p.cat))}</span>
         ${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">` : productArt(p)}
       </div>
-      <h3>${esc(p.name)}</h3>
+      <h3><a href="${AZ.productUrl(p.id)}">${esc(p.name)}</a></h3>
       <div class="tag">${esc(p.tagline || '')}</div>
       <div class="foot">
         <span class="price">${idr(p.price)}</span>
+        <a class="mini" href="${AZ.productUrl(p.id)}" style="height:38px">Details</a>
         <button class="add" data-add="${esc(p.id)}" aria-label="Add ${esc(p.name)}">
           <span>Add</span>
           <svg class="tick" viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
@@ -980,6 +925,8 @@ $('#toCheckout').onclick = () => {
 document.addEventListener('click', (e) => {
   const add = e.target.closest('[data-add]');
   if (add) { addToCart(add.dataset.add, add); return; }
+  const pdp = e.target.closest('[data-pdp]');
+  if (pdp) { location.href = AZ.productUrl(pdp.dataset.pdp); return; }
   const q = e.target.closest('[data-q]');
   if (q) { bumpQty(q.dataset.id, Number(q.dataset.q)); return; }
   const nav = e.target.closest('[data-nav]');
@@ -1019,6 +966,10 @@ if (heroTitle) {
   wrapNode(heroTitle);
 }
 if (location.hash === '#orders') go('admin');
+if (location.hash === '#cart' || location.hash === '#clocks') {
+  if (location.hash === '#cart') setTimeout(() => { renderCart(); openCart(true); }, 400);
+  if (location.hash === '#clocks') setTimeout(() => $('.block').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }), 300);
+}
 document.addEventListener('visibilitychange', () => { if (!document.hidden && $('#v-admin').classList.contains('on')) renderAdmin(); });
 window.__errs = [];
 addEventListener('error', (e) => window.__errs.push(e.message));
